@@ -34,19 +34,26 @@ CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
 			'for': null
 		}
 	};
-	if (!fieldName) {
+	options = $.extend(defaults, options);
+	if (!fieldName && options.type !== 'submit') {
 		return false;
 	}
-	if (this.isCreated) {
-		nameObj = this._splitFieldName(fieldName);
-		model = nameObj.model || this.model;
-		name =	'data' + '[' + model + ']' + '[' + nameObj.name + ']';
-	} else {
-		name = fieldName;	
+	if (fieldName) {
+		if (this.isCreated) {
+			nameObj = this._splitFieldName(fieldName);
+			model = nameObj.model || this.model;
+			name =	'data' + '[' + model + ']' + '[' + nameObj.name + ']';
+		} else {
+			name = fieldName;	
+		}
 	}
-	options = $.extend(defaults, options);
 	if (!options.id) {
 		options.id = this.model ? this.model + fieldName : '';
+	}
+	if (options.type === 'submit') {
+		options.id = null;
+		options.name = null;
+		options.label = false;
 	}
 	$input = $('<input>', {
 		type: options.type,
