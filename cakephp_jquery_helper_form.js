@@ -6,7 +6,6 @@ CakePHP.JQuery.Helper.Form = {
 };
 
 CakePHP.JQuery.Helper.Form.create = function create(model, options) {
-	console.log(this);
 	var $form;
 	var defaults = {
 		type: 'post'
@@ -23,7 +22,7 @@ CakePHP.JQuery.Helper.Form.create = function create(model, options) {
 };
 
 CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
-	var nameObj, model, name, $div, $label, $input, id, input;
+	var nameObj, model, name, $div, $label, $input, id, ret;
 	var defaults = {
 		type: 'text',
 		value: null,
@@ -61,13 +60,13 @@ CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
 		value: options.value,
 		id: this.model ? this.model + fieldName : ''
 	});
-	input = $input;
+	ret = $input;
 	if (options.div !== false) {
 		$div = $('<div>', {
 			'class': options.div ? options.div['class'] : options.div
 		});
 		$div.append($input);
-		input = $div;
+		ret = $div;
 	}
 	if (options.label !== false) {
 		options.label['for'] = options.label['for'] || options.id;
@@ -78,14 +77,14 @@ CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
 		if ($div) {
 			$div.prepend($label);
 		} else {
-			input = $input.before($label);
+			ret = $input.before($label);
 		}
 	}
 	// append input to form
 	if (this.isCreated) {
-		this.DOMElement.append(input);
+		this.DOMElement.append(ret);
 	}
-	return input;
+	return ret;
 };
 
 CakePHP.JQuery.Helper.Form.end = function end(options) {
