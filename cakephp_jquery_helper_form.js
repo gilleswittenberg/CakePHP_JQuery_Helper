@@ -15,9 +15,9 @@ CakePHP.JQuery.Helper.Form.create = function create(model, options) {
 		options.enctype = 'multipart/form-data';
 	}
 	$form = $('<form>', options);
-	this.DOMElement = $form;	
-	this.model = model;	
-	this.isCreated = true;	
+	this.DOMElement = $form;
+	this.model = model;
+	this.isCreated = true;
 	return $form;
 };
 
@@ -28,7 +28,7 @@ CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
 		value: null,
 		div: {
 			'class': null
-		},	
+		},
 		label: {
 			'for': null
 		}
@@ -43,7 +43,7 @@ CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
 			model = nameObj.model || this.model;
 			name =	'data' + '[' + model + ']' + '[' + nameObj.name + ']';
 		} else {
-			name = fieldName;	
+			name = fieldName;
 		}
 	}
 	if (!options.id) {
@@ -88,7 +88,6 @@ CakePHP.JQuery.Helper.Form.input = function input(fieldName, options) {
 };
 
 CakePHP.JQuery.Helper.Form.end = function end(options) {
-	console.log(this);
 	var value, input, ret;
 	var defaults = {
 		type: 'submit'
@@ -101,7 +100,7 @@ CakePHP.JQuery.Helper.Form.end = function end(options) {
 	options = $.extend(defaults, options);
 	input = this.input(null, options);
 	if (this.isCreated) {
-		// reset 
+		// reset
 		ret = this.DOMElement;
 		this.DOMElement = null;
 		this.model = null;
@@ -129,7 +128,7 @@ CakePHP.JQuery.Helper.Form._splitFieldName = function _splitFieldName(fieldName)
 			// grep string before first appearance of dot
 			matches = fieldName.match(/(.*?)\./);
 			fieldNameObj.model = matches[0].substr(0, matches[0].length-1);
-			fieldNameObj.name = fieldName.substr(matches[0].length); 
+			fieldNameObj.name = fieldName.substr(matches[0].length);
 		} else {
 			fieldNameObj.name = fieldName;
 		}
